@@ -31,6 +31,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: SlideY 2s;
+}
+
+/* Animação subindo AreaInput */
+@keyframes SlideY{
+    from{
+        transform: translateY(90px);
+    }
+    to{
+        transform: translateY(0);
+    }
 }
 
 .inputContainer div{
@@ -71,6 +82,36 @@
     font-weight: bold;
     margin-top: 8px;
     color: #000;
+    transition: transform 0.7s;
 
 }
 
+.inputContainer button:hover{
+    transform: scale(1.05);
+}
+
+@media only screen and (max-width: 758px){
+
+
+    .logoContainer{
+        width: 80%;
+        text-align: center;
+    }
+
+    .logoContainer img{
+        width: 140px;
+    }
+
+    .logoContainer h1{
+        font-size: 32px;
+        margin-top: 20px;
+    }
+
+    .logoContainer span{
+        font-size: 14px;
+    }
+
+    .inputContainer{
+        width: 80%;
+    }
+}
