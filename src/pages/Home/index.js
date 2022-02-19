@@ -1,9 +1,31 @@
+import { useState } from 'react';
 import { FiLink } from 'react-icons/fi';
-import Menu from '../../Components/Menu'
 import './home.css';
-
+import Modal from '../../Components/Modal';
+import Menu from '../../Components/Menu';
+import api from '../../services/api';
 
 export default function Home(){
+    const [link, setLink] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [data, setData] = useState('');
+
+    async function shortLink(){
+
+      try{
+        const response = await api.post('/shorten', {
+          long_url: link
+        })
+
+        setData(response.data);
+        setShowModal(true);
+
+      }catch{
+        alert('Ops parece que algo deu errado')
+        setLink('');
+      }
+    }
+
     return (
       <div className="homeContainer">
 
@@ -18,12 +40,21 @@ export default function Home(){
           <FiLink size={24} color="#FFF"/>
           <input  
             placeholder='Cole seu link aqui...'
+            value={link}
+            onChange={ (e) => setLink(e.target.value)}
             />
           </div>
-          <button>Gerar Link</button>
+          <button onClick={shortLink} >Gerar Link</button>
         </div>
 
         <Menu/>
+
+        { showModal && (
+          <Modal
+            closeModal={() => setShowModal(false)}
+            content={data}
+          />
+        ) }
 
       </div>
 
