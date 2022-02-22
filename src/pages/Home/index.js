@@ -4,6 +4,7 @@ import './home.css';
 import Modal from '../../Components/Modal';
 import Menu from '../../Components/Menu';
 import api from '../../services/api';
+import { saveLink } from '../../services/linkStorage'
 
 export default function Home(){
     const [link, setLink] = useState('');
@@ -19,6 +20,8 @@ export default function Home(){
 
         setData(response.data);
         setShowModal(true);
+
+        saveLink('@encurtaLink', response.data);
 
       }catch{
         alert('Ops parece que algo deu errado')
